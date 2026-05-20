@@ -1,513 +1,1053 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radhi Sri Bhavya Patamsetti - Data Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --black:#0b0b0b;--black2:#111111;--black3:#161616;--black4:#1f1f1f;
-  --red:#f83a3e;--red-b:#ff2d55;--red-dim:#a1221a;
-  --border:#2b2b2b;--border2:#3f2a2a;--text:#ffffff;--muted:#cfcfcf;--muted2:#a89a9a;--white:#ffffff;
-  --card-bg:rgba(255,255,255,0.02);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(circle at 10% 8%,rgba(255,45,85,0.04),transparent 8%),radial-gradient(circle at 90% 92%,rgba(0,0,0,0.55),transparent 30%),var(--black);color:var(--text);font-family:'Sora',sans-serif;font-weight:300;overflow-x:hidden}
-body::after{content:'';position:fixed;inset:0;opacity:.03;pointer-events:none;z-index:9000;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.cursor,.cursor-ring{position:fixed;pointer-events:none;border-radius:50%;z-index:8999;transform:translate(-50%,-50%)}
-.cursor{width:9px;height:9px;background:var(--red-b)}
-.cursor-ring{width:34px;height:34px;border:1px solid rgba(231,76,60,.4);transition:all .14s ease}
-body{cursor:none}
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:rgba(5,5,5,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--white);text-decoration:none;letter-spacing:-.01em;line-height:1}
-.nav-logo span{color:var(--red-b)}
-.nav-links{display:flex;gap:0;list-style:none}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1rem;border-right:1px solid var(--border);transition:color .2s,background .2s;display:block}
-.nav-links li:first-child a{border-left:1px solid var(--border)}
-.nav-links a:hover,.nav-links a.active{color:var(--red-b);background:rgba(192,57,43,.05)}
-.hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
-.hamburger span{width:22px;height:1px;background:var(--text);display:block;transition:all .3s}
-.mobile-menu{display:none;position:fixed;inset:0;z-index:490;background:rgba(5,5,5,.98);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--white);text-decoration:none;transition:color .2s}
-.mobile-menu a:hover{color:var(--red-b)}
-#home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:8rem 4rem 5rem}
-.home-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(192,57,43,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(192,57,43,.04) 1px,transparent 1px);background-size:70px 70px}
-.home-line{position:absolute;top:-20%;right:16%;width:1px;height:140%;background:linear-gradient(to bottom,transparent,rgba(192,57,43,.35),transparent);transform:rotate(18deg);pointer-events:none}
-.home-line2{position:absolute;top:-20%;right:26%;width:1px;height:140%;background:linear-gradient(to bottom,transparent,rgba(192,57,43,.12),transparent);transform:rotate(18deg);pointer-events:none}
-.home-orb{position:absolute;top:50%;right:-5%;transform:translateY(-50%);width:700px;height:700px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,45,85,.28) 0%,rgba(255,122,89,.07) 40%,transparent 70%);filter:blur(60px);animation:pulse 7s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:translateY(-50%) scale(1)}50%{opacity:.6;transform:translateY(-50%) scale(1.07)}}
-.home-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%}
-.home-eyebrow{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red-b);margin-bottom:1.75rem;display:flex;align-items:center;gap:1rem;animation:fadeUp .7s ease both}
-.home-eyebrow::before{content:'';width:36px;height:1px;background:var(--red-b)}
-.home-name{font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,10vw,10rem);font-weight:300;line-height:.9;color:var(--white);letter-spacing:-.02em;animation:fadeUp .7s .1s ease both;text-shadow:0 8px 30px rgba(0,0,0,.6)}
-.home-name em{font-style:italic;color:var(--red-b);display:block}
-.home-tagline{font-family:'Space Mono',monospace;font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .5rem;padding-left:1rem;border-left:2px solid var(--red);animation:fadeUp .7s .2s ease both}
-.home-summary{max-width:560px;color:var(--muted);line-height:1.8;font-size:1.05rem;margin-bottom:2.5rem;animation:fadeUp .7s .3s ease both}
-.resume-block{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;animation:fadeUp .7s .35s ease both}
-.resume-select{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;background:var(--black3);color:var(--muted);border:1px solid var(--border2);padding:.5rem 1rem;cursor:pointer;transition:all .25s;appearance:none}
-.resume-select:hover,.resume-select:focus{border-color:var(--red);color:var(--red-b);outline:none}
-.resume-dl{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;padding:.55rem 1.25rem;border:1px solid var(--red-dim);color:var(--red-b);text-decoration:none;background:rgba(192,57,43,.08);transition:all .25s}
-.resume-dl:hover{background:var(--red);color:#fff;border-color:var(--red)}
-.home-cta{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .4s ease both}
-.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.75rem;transition:all .25s;border:none}
-.btn-primary{background:var(--red);color:#fff}
-.btn-primary:hover{background:var(--red-b);transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,57,43,.35)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2)}
-.btn-ghost:hover{border-color:var(--red);color:var(--red-b);transform:translateY(-2px)}
-.stats-bar{position:relative;z-index:2;display:flex;flex-wrap:wrap;border-top:1px solid var(--border);margin-top:4rem}
-.stat-item{flex:1;min-width:160px;padding:2rem 2.5rem;border-right:1px solid var(--border);animation:fadeUp .8s ease both}
-.stat-item:last-child{border-right:none}
-.stat-num{font-family:'Times New Roman',serif;font-size:3.2rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.35rem}
-.stat-num span{color:var(--red-b)}
-.stat-label{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-section{padding:6rem 4rem;border-top:1px solid var(--border)}
-.wrap{max-width:1200px;margin:0 auto;width:100%}
-.sec-eye{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-b);display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
-.sec-eye::before{content:'';width:28px;height:1px;background:var(--red-b)}
-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:3.5rem;text-shadow:0 6px 20px rgba(0,0,0,.45)}
-h2 em{font-style:italic;color:var(--red-b)}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
-.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
-.about-text{display:flex;flex-direction:column;gap:1.25rem}
-.about-text p{color:var(--muted);line-height:1.85;font-size:.95rem}
-.about-text strong{color:var(--text)}
-.h-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.h-card{background:linear-gradient(180deg,var(--card-bg),var(--black3));border:1px solid var(--border);padding:1.5rem 1.25rem;transition:border-color .3s,transform .3s,box-shadow .3s;box-shadow:0 6px 18px rgba(0,0,0,.55)}
-.h-card:hover{border-color:var(--red-dim);transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,.6)}
-.h-num{font-family:'Times New Roman',serif;font-size:2.6rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.4rem}
-.h-num span{color:var(--red-b)}
-.h-label{font-size:.8rem;color:var(--muted);line-height:1.5}
-.exp-item{display:grid;grid-template-columns:220px 1fr;gap:3rem;padding:3rem 0;border-bottom:1px solid var(--border);transition:background .3s}
-.exp-item:last-child{border-bottom:none}
-.exp-item:hover{background:rgba(192,57,43,.02)}
-.exp-left{padding-top:.3rem}
-.exp-date{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.06em;color:var(--red-b);margin-bottom:.5rem}
-.exp-co{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.25rem}
-.exp-loc{font-size:.8rem;color:var(--muted2);line-height:1.5}
-.exp-role{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--white);margin-bottom:1.25rem}
-.exp-ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-.exp-ul li{padding-left:1.25rem;position:relative;color:var(--muted);font-size:.9rem;line-height:1.7}
-.exp-ul li::before{content:'→';position:absolute;left:0;color:var(--red-dim);font-size:.75rem;top:.15em}
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.edu-card{background:linear-gradient(180deg,var(--card-bg),var(--black3));border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;box-shadow:0 8px 22px rgba(0,0,0,.55)}
-.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red);opacity:0;transition:opacity .3s}
-.edu-card:hover{border-color:var(--red-dim);transform:translateY(-6px);box-shadow:0 22px 64px rgba(0,0,0,.65)}
-.edu-card:hover::before{opacity:1}
-.edu-badge{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red-b);border:1px solid var(--red-dim);padding:.25rem .75rem;display:inline-block;margin-bottom:1.25rem}
-.edu-deg{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--white);line-height:1.25;margin-bottom:.75rem}
-.edu-sch{font-size:.85rem;color:var(--muted);line-height:1.55;margin-bottom:1.5rem}
-.edu-meta{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--border);padding-top:1.25rem}
-.edu-yr{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted2);letter-spacing:.05em}
-.edu-gpa{font-family:'Times New Roman',serif;font-size:2rem;font-weight:300;color:var(--white);line-height:1}
-.edu-gpa-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted2);letter-spacing:.06em;text-align:right}
-.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.sk-block{background:linear-gradient(180deg,var(--card-bg),var(--black3));border:1px solid var(--border);padding:2rem;transition:border-color .3s,box-shadow .3s;box-shadow:0 6px 18px rgba(0,0,0,.5)}
-.sk-block:hover{border-color:var(--border2);box-shadow:0 16px 44px rgba(0,0,0,.55)}
-.sk-cat{font-family:'Space Mono',monospace;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red-b);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
-.sk-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.sk-tag{background:var(--black4);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.95rem;color:var(--text);padding:.35rem .9rem;letter-spacing:.04em;transition:all .2s}
-.sk-tag:hover{border-color:var(--red-dim);color:var(--red-b)}
-.certs{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:3rem}
-.cert{background:linear-gradient(180deg,var(--card-bg),var(--black3));border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.95rem;color:var(--text);padding:.6rem 1rem;letter-spacing:.04em;display:flex;align-items:center;gap:.5rem;transition:all .2s;box-shadow:0 6px 18px rgba(0,0,0,.45)}
-.cert::before{content:'✦';color:var(--red-b);font-size:.55rem}
-.cert:hover{border-color:var(--red-b);color:var(--red-b);transform:translateY(-3px);box-shadow:0 18px 44px rgba(0,0,0,.55)}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
-.proj-card{background:linear-gradient(180deg,var(--card-bg),var(--black3));border:1px solid var(--border);padding:2.25rem;position:relative;overflow:hidden;transition:all .35s;box-shadow:0 8px 28px rgba(0,0,0,.55)}
-.proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,77,79,.07) 0%,transparent 50%);opacity:0;transition:opacity .35s;pointer-events:none}
-.proj-card:hover{border-color:var(--red-dim);transform:translateY(-8px);box-shadow:0 30px 70px rgba(0,0,0,.65)}
-.proj-card:hover::after{opacity:1}
-.proj-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(226, 69, 51, 0.1);line-height:1;margin-bottom:.5rem}
-.proj-tech{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red-b);margin-bottom:.75rem}
-.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--white);margin-bottom:.85rem;line-height:1.25}
-.proj-desc{font-size:.875rem;color:var(--muted);line-height:1.75}
-.proj-links{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
-.project-link{display:inline-flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.8rem;color:#fff;text-decoration:none;padding:.55rem .9rem;border-radius:6px;transition:all .18s;background:var(--red);border:none}
-.project-link svg{width:13px;height:13px;flex-shrink:0;stroke:currentColor;stroke-width:1.6;fill:none}
-.project-link:hover{background:var(--red-b);transform:translateY(-3px)}
-#contact{text-align:center}
-#contact .wrap{display:flex;flex-direction:column;align-items:center}
-#contact h2{margin-bottom:1rem}
-.contact-sub{color:var(--muted);max-width:480px;margin-bottom:3rem;line-height:1.8;font-size:.95rem}
-.contact-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
-.con-link{display:inline-flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:.65rem 1.4rem;border:1px solid var(--border2);transition:all .25s}
-.con-link:hover{border-color:var(--red);color:var(--red-b);transform:translateY(-2px)}
-.con-link svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
-footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-footer p{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.06em;color:var(--muted2)}
-footer a{color:var(--red-b);text-decoration:none}
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}
-  #home,section{padding:6rem 1.5rem 4rem}
-  .home-name{font-size:clamp(3.5rem,14vw,6rem)}
-  .about-grid,.edu-grid,.exp-item,.sk-grid{grid-template-columns:1fr}
-  .exp-item{gap:1.25rem}.stats-bar{flex-direction:column}
-  .stat-item{border-right:none;border-bottom:1px solid var(--border)}
-  .stat-item:last-child{border-bottom:none}
-  footer{padding:1.5rem}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Radhi Sri Bhavya Patamsetti portfolio — Machine Learning Engineer focused on Python, SQL, Scikit-learn, TensorFlow, XGBoost, Streamlit, Power BI, Tableau, Generative AI, and AI-powered analytics applications." />
+  <meta name="keywords" content="Machine Learning Engineer, Data Scientist, Python, SQL, Scikit-learn, TensorFlow, XGBoost, Streamlit, Power BI, Tableau, Generative AI, Data Visualization, ML Portfolio" />
+  <meta name="author" content="Radhi Sri Bhavya Patamsetti" />
+  <title>Radhi Sri Bhavya Patamsetti's Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --surface:#f5f5f7;
+      --surface-2:#fbfbfd;
+      --text:#1d1d1f;
+      --muted:#6e6e73;
+      --line:#d2d2d7;
+      --line-soft:#e8e8ed;
+      --black:#000000;
+      --white:#ffffff;
+      --blue:#0066cc;
+      --blue-dark:#004c99;
+      --shadow:0 24px 70px rgba(0,0,0,.08);
+      --radius:28px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .skip-link{position:absolute;left:-999px;top:0;background:#000;color:#fff;padding:12px 16px;z-index:9999}
+    .skip-link:focus{left:12px;top:12px;border-radius:999px}
+
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      height:64px;background:rgba(255,255,255,.78);
+      backdrop-filter:saturate(180%) blur(20px);
+      -webkit-backdrop-filter:saturate(180%) blur(20px);
+      border-bottom:1px solid rgba(210,210,215,.65);
+    }
+    .nav-inner{max-width:var(--max);height:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:800;letter-spacing:-.04em;font-size:1.05rem;color:#000;display:flex;align-items:center;gap:10px}
+    .brand-mark{width:34px;height:34px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:800;letter-spacing:-.04em}
+    .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+    .nav-links a{display:block;padding:8px 12px;border-radius:999px;color:var(--muted);font-size:.88rem;font-weight:600;transition:.2s ease}
+    .nav-links a:hover,.nav-links a.active{background:var(--surface);color:#000}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .nav-btn{background:#000;color:#fff;border-radius:999px;padding:9px 16px;font-size:.86rem;font-weight:700;transition:.2s ease;border:1px solid #000}
+    .nav-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+    .menu-btn{display:none;background:transparent;border:0;width:40px;height:40px;border-radius:50%;cursor:pointer}
+    .menu-btn span{display:block;width:20px;height:2px;background:#000;margin:5px auto;border-radius:2px;transition:.2s ease}
+
+    .mobile-menu{display:none;position:fixed;inset:64px 0 auto 0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);z-index:999;border-bottom:1px solid var(--line-soft);padding:18px 24px;box-shadow:0 24px 70px rgba(0,0,0,.08)}
+    .mobile-menu.open{display:block}
+    .mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid var(--line-soft);font-weight:700;color:#000}
+    .mobile-menu a:last-child{border-bottom:0}
+
+    main{padding-top:64px}
+    .section{padding:96px 24px}
+    .wrap{max-width:var(--max);margin:0 auto}
+
+    .hero{min-height:calc(100vh - 64px);display:flex;align-items:center;background:linear-gradient(180deg,#fff 0%,#f5f5f7 100%);position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;right:-180px;top:8%;width:640px;height:640px;background:radial-gradient(circle,rgba(0,102,204,.14),rgba(0,102,204,0) 65%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative;z-index:1}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line-soft);box-shadow:0 8px 24px rgba(0,0,0,.04);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:700;font-size:.84rem;margin-bottom:22px}
+    .dot{width:8px;height:8px;background:#30d158;border-radius:50%;box-shadow:0 0 0 4px rgba(48,209,88,.14)}
+    h1{font-size:clamp(3.4rem,7vw,6.7rem);line-height:.92;letter-spacing:-.075em;font-weight:800;color:#000;margin-bottom:24px}
+    .hero-title-accent{display:block;color:#86868b}
+    .hero-sub{font-size:clamp(1.2rem,2.2vw,1.75rem);line-height:1.2;letter-spacing:-.035em;color:#1d1d1f;font-weight:700;max-width:740px;margin-bottom:18px}
+    .hero-summary{font-size:1.05rem;color:var(--muted);max-width:650px;margin-bottom:30px}
+    .hero-summary strong{color:#000}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 20px;font-size:.95rem;font-weight:800;border:1px solid transparent;transition:.22s ease;cursor:pointer}
+    .btn-primary{background:#000;color:#fff;border-color:#000}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(0,0,0,.18)}
+    .btn-secondary{background:#fff;color:#000;border-color:var(--line)}
+    .btn-secondary:hover{border-color:#000;transform:translateY(-2px)}
+    .hero-links{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.92rem;font-weight:700}
+    .hero-links a{border-bottom:1px solid transparent;transition:.2s ease}
+    .hero-links a:hover{color:#000;border-color:#000}
+
+    .hero-panel{background:rgba(255,255,255,.74);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+    .profile-card{background:#fff;border:1px solid var(--line-soft);border-radius:24px;padding:26px;margin-bottom:16px}
+    .profile-top{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+    .avatar{width:70px;height:70px;border-radius:22px;background:linear-gradient(135deg,#000,#444);color:#fff;display:grid;place-items:center;font-size:1.35rem;font-weight:800;letter-spacing:-.06em}
+    .profile-name{font-weight:800;font-size:1.15rem;letter-spacing:-.03em;color:#000}
+    .profile-role{color:var(--muted);font-weight:600;font-size:.92rem}
+    .quick-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .quick-stat{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:18px;padding:16px}
+    .quick-stat strong{display:block;font-size:1.65rem;letter-spacing:-.05em;color:#000;line-height:1}
+    .quick-stat span{display:block;color:var(--muted);font-size:.82rem;font-weight:700;margin-top:6px}
+    .resume-box{background:#000;color:#fff;border-radius:24px;padding:22px}
+    .resume-box h3{font-size:1rem;margin-bottom:8px;letter-spacing:-.03em}
+    .resume-box p{color:#d6d6d6;font-size:.9rem;margin-bottom:14px}
+    select{width:100%;appearance:none;border:1px solid #333;background:#111;color:#fff;border-radius:14px;padding:13px 14px;font-weight:700;outline:none;margin-bottom:12px}
+    .resume-download{width:100%;background:#fff;color:#000;border-radius:14px;padding:13px 14px;display:flex;justify-content:center;font-weight:800;opacity:.45;pointer-events:none;transition:.2s ease}
+    .resume-download.enabled{opacity:1;pointer-events:auto}
+
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:42px}
+    .kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:800;margin-bottom:10px}
+    h2{font-size:clamp(2.4rem,4.5vw,4.4rem);line-height:.98;letter-spacing:-.065em;font-weight:800;color:#000}
+    .section-intro{max-width:520px;color:var(--muted);font-size:1rem}
+
+    .about-card{background:var(--surface);border-radius:var(--radius);padding:42px;border:1px solid var(--line-soft)}
+    .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:start}
+    .about-text p{font-size:1.05rem;color:#515154;margin-bottom:18px}
+    .about-text strong{color:#000}
+    .focus-list{display:grid;gap:12px}
+    .focus-item{background:#fff;border:1px solid var(--line-soft);border-radius:18px;padding:18px}
+    .focus-item h3{font-size:1rem;letter-spacing:-.03em;margin-bottom:5px;color:#000}
+    .focus-item p{font-size:.92rem;color:var(--muted)}
+
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+    .metric{background:#fff;border:1px solid var(--line-soft);border-radius:22px;padding:22px;box-shadow:0 12px 32px rgba(0,0,0,.04)}
+    .metric strong{font-size:2.25rem;line-height:1;letter-spacing:-.06em;color:#000;display:block}
+    .metric span{display:block;margin-top:8px;color:var(--muted);font-size:.88rem;font-weight:700}
+
+    .timeline{display:grid;gap:18px}
+    .exp-card{display:grid;grid-template-columns:260px 1fr;gap:28px;background:#fff;border:1px solid var(--line-soft);border-radius:var(--radius);padding:30px;box-shadow:0 18px 52px rgba(0,0,0,.05);transition:.22s ease}
+    .exp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .exp-date{font-weight:800;color:#000;margin-bottom:8px;letter-spacing:-.02em}
+    .exp-company{font-weight:800;color:#000;margin-bottom:4px}
+    .exp-location{color:var(--muted);font-size:.9rem;font-weight:600}
+    .exp-role{font-size:1.35rem;font-weight:800;letter-spacing:-.04em;color:#000;margin-bottom:14px}
+    .exp-points{display:grid;gap:10px;list-style:none}
+    .exp-points li{position:relative;padding-left:22px;color:#515154;font-size:.98rem}
+    .exp-points li::before{content:"";position:absolute;left:0;top:.63em;width:7px;height:7px;border-radius:50%;background:#000}
+
+    .edu-grid,.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--line-soft);border-radius:var(--radius);padding:30px;box-shadow:0 18px 52px rgba(0,0,0,.045);transition:.22s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:.76rem;font-weight:800;color:#515154;margin-bottom:18px;background:#fafafa}
+    .card h3{font-size:1.45rem;line-height:1.15;letter-spacing:-.04em;color:#000;margin-bottom:10px}
+    .card p{color:var(--muted);font-size:.96rem;margin-bottom:16px}
+    .meta{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--line-soft);padding-top:16px;color:#515154;font-weight:700;font-size:.9rem}
+
+    .skills-wrap{background:#000;color:#fff;border-radius:36px;padding:44px}
+    .skills-wrap .kicker{color:#a1a1a6}
+    .skills-wrap h2{color:#fff}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+    .skill-block{background:#111;border:1px solid #242424;border-radius:24px;padding:24px}
+    .skill-block h3{font-size:1rem;margin-bottom:14px;letter-spacing:-.02em}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{background:#1d1d1f;border:1px solid #2c2c2e;color:#f5f5f7;border-radius:999px;padding:8px 11px;font-size:.84rem;font-weight:700}
+    .cert-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .cert{background:#fff;color:#000;border-radius:999px;padding:10px 14px;font-size:.84rem;font-weight:800}
+
+    .project-card{display:flex;flex-direction:column;min-height:100%}
+    .project-num{font-size:.88rem;color:var(--muted);font-weight:800;margin-bottom:12px}
+    .project-tech{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;margin-bottom:14px}
+    .project-card p{flex:1}
+    .project-link{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--blue);margin-top:6px}
+    .project-link:hover{color:var(--blue-dark)}
+
+    .contact-panel{background:linear-gradient(180deg,#000,#1d1d1f);border-radius:42px;color:#fff;padding:56px;text-align:center;overflow:hidden;position:relative}
+    .contact-panel::before{content:"";position:absolute;left:50%;top:-220px;transform:translateX(-50%);width:600px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%)}
+    .contact-panel > *{position:relative;z-index:1}
+    .contact-panel h2{color:#fff;margin-bottom:14px}
+    .contact-panel p{color:#d2d2d7;max-width:620px;margin:0 auto 26px}
+    .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+    .contact-links a{background:#fff;color:#000;border-radius:999px;padding:12px 16px;font-weight:800;font-size:.9rem}
+
+    footer{padding:28px 24px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:.88rem;font-weight:600}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    @media(max-width:980px){
+      .nav-links,.nav-actions{display:none}.menu-btn{display:block}
+      .hero-grid,.about-grid,.exp-card,.edu-grid,.project-grid{grid-template-columns:1fr}
+      .hero{min-height:auto}.hero-panel{order:-1}.section{padding:76px 20px}
+      .metrics{grid-template-columns:repeat(2,1fr)}.skills-grid{grid-template-columns:1fr 1fr}
+      h1{font-size:clamp(3.2rem,13vw,5rem)}
+    }
+    @media(max-width:640px){
+      .nav-inner{padding:0 16px}.brand span:last-child{display:none}
+      .section{padding:64px 16px}.hero{padding-top:32px}
+      .about-card,.skills-wrap,.contact-panel{padding:28px;border-radius:28px}
+      .metrics,.skills-grid,.quick-stats{grid-template-columns:1fr}
+      .exp-card,.card{padding:24px;border-radius:24px}
+      .section-head{display:block}.section-intro{margin-top:14px}
+      .contact-links a,.btn{width:100%}
+      .hero-links{display:grid;gap:10px}
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-<div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="curR"></div>
-
-<div class="mobile-menu" id="mob">
-  <a href="#home" onclick="cm()">Home</a>
-  <a href="#about" onclick="cm()">About</a>
-  <a href="#experience" onclick="cm()">Experience</a>
-  <a href="#education" onclick="cm()">Education</a>
-  <a href="#skills" onclick="cm()">Skills</a>
-  <a href="#projects" onclick="cm()">Projects</a>
-  <a href="#contact" onclick="cm()">Contact</a>
-</div>
-
-<nav>
-  <a href="#home" class="nav-logo">RP<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- HOME -->
-<section id="home">
-  <div class="home-grid"></div><div class="home-line"></div><div class="home-line2"></div><div class="home-orb"></div>
-  <div class="home-inner">
-    <div class="home-eyebrow">Data Analyst &nbsp;·&nbsp; San Marcos, Texas</div>
-    <h1 class="home-name">Radhi Sri Bhavya<br><em>Patamsetti</em></h1>
-    <div class="home-tagline">Python · SQL · Tableau · Power BI · Machine Learning · AI Forecasting</div>
-    <p class="home-summary">Data Analyst with 2+ years of experience translating complex datasets into strategic decisions. I build AI-powered dashboards, automate ETL workflows, develop predictive ML models, and partner with stakeholders to drive measurable business outcomes.</p>
-
-    <div class="resume-block">
-      <select class="resume-select" id="resumeSelect" onchange="updateResume()">
-        <option value="">— Select Resume Version —</option>
-        <option value="Radhi_Patamsetti_Data_Analyst_Resume.pdf">📊 Data Analyst</option>
-        <option value="Radhi_Patamsetti_BI_Analyst_Resume.pdf">📈 BI Analyst</option>
-        <!-- <option value="Radhi_Patamsetti_Data_Scientist_Resume.pdf">🤖 Data Scientist</option> -->
-        <option value="Radhi_Patamsetti_Junior_Data_Scientist_Resume.pdf">🧪 Junior Data Scientist</option>
-        <!-- <option value="Radhi_Patamsetti_Marketing_Analytics_Resume.pdf">📣 Marketing Analytics</option>
-        <option value="Radhi_Patamsetti_Operations_Analyst_Resume.pdf">⚙️ Operations Analyst</option>
-        <option value="Radhi_Patamsetti_Reporting_Analyst_Resume.pdf">📋 Reporting Analyst</option> -->
-      </select>
-      <a class="resume-dl" id="resumeLink" href="#" download style="opacity:.4;pointer-events:none">↓ &nbsp;Download Resume</a>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Home">
+        <span class="brand-mark">RP</span>
+        <span>Radhi Patamsetti</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="nav-btn" href="#contact">Hire Me</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <div class="home-cta">
-      <a href="#contact" class="btn btn-primary">Get in Touch</a>
-      <a href="#projects" class="btn btn-ghost">View Projects</a>
-    </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </div>
 
-  <div class="stats-bar">
-    <div class="stat-item"><div class="stat-num">10K<span>+</span></div><div class="stat-label">Records Analyzed</div></div>
-    <div class="stat-item"><div class="stat-num">40<span>%</span></div><div class="stat-label">ETL Time Reduced</div></div>
-    <div class="stat-item"><div class="stat-num">25<span>%</span></div><div class="stat-label">Engagement Increase</div></div>
-    <div class="stat-item"><div class="stat-num">50K<span>+</span></div><div class="stat-label">Interactions Analyzed</div></div>
-  </div>
-</section>
+  <main id="main">
+    <section class="hero section" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="dot"></span> Open to Data Analyst, Data Scientist, Machine Learning Engineer & AI roles</div>
+          <h1>Radhi Sri Bhavya <span class="hero-title-accent">Patamsetti.</span></h1>
+          <p class="hero-sub">Machine Learning Engineer building ML pipelines, AI dashboards, anomaly detection systems, and predictive analytics solutions.</p>
+          <p class="hero-summary">Graduate Computer Science student at Texas State University with hands-on experience in <strong>Python, SQL, Scikit-learn, TensorFlow, XGBoost, Streamlit, Power BI, Tableau, Generative AI, ETL workflows, and model evaluation</strong>.</p>
+          <div class="cta-row">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+          </div>
+          <div class="hero-links" aria-label="Professional links">
+            <a href="mailto:radhisribhavya2024p@gmail.com">radhisribhavya2024p@gmail.com</a>
+            <a href="https://www.linkedin.com/in/bhavyapatamsetti/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/BhavyaPatamsetti" target="_blank" rel="noopener">GitHub</a>
+            <a href="tel:7372066924">(737) 206-6924</a>
+          </div>
+        </div>
 
-<!-- ABOUT -->
-<section id="about">
+        <aside class="hero-panel reveal" aria-label="Portfolio summary" style="transition-delay:.08s">
+          <div class="profile-card">
+            <div class="quick-stats">
+              <div class="quick-stat"><strong>10K+</strong><span>Records analyzed</span></div>
+              <div class="quick-stat"><strong>40%</strong><span>ETL time reduced</span></div>
+              <div class="quick-stat"><strong>2+</strong><span>Years experience</span></div>
+              <div class="quick-stat"><strong>50K+</strong><span>Interactions analyzed</span></div>
+            </div>
+          </div>
+          <div class="resume-box">
+            <h3>Download resume</h3>
+            <a class="resume-download enabled" id="resumeLink" href="/Users/bhavyapatamsetti/Desktop/Land a Job/Fixed Resumes/Radhi_Patamsetti_Data_Scientist_Resume.pdf" download>Download Resume</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+<section class="section" id="about">
   <div class="wrap">
-    <div class="sec-eye reveal">01 — About</div>
-    <h2 class="reveal">About <em>Me</em></h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>I'm <strong>Radhi Sri Bhavya Patamsetti</strong>, a Data Analyst pursuing my Master's in Computer Science at Texas State University. My work sits at the intersection of data engineering, statistical modeling, machine learning, and visual storytelling.</p>
-        <p>My journey spans academic research and industry - from architecting BI solutions and automating ETL pipelines at the Office of Educator Preparation, to building ML-powered analytics, NLP models, and predictive systems at SAGE in Hyderabad.</p>
-        <p>I specialize in turning messy, large-scale datasets into structured insights using Python, SQL, and visualization platforms. Whether it's an AI-powered Power BI dashboard, a Tableau ROI report, a Prophet forecasting model, or a deep learning pipeline - I focus on <strong>clarity, accuracy, and real-world impact.</strong></p>
-        <p>When I'm not crunching numbers, I'm building data automations, exploring AI tools, and learning how emerging technologies solve real problems at scale.</p>
-      </div>
-      <div class="h-cards reveal" style="transition-delay:.12s">
-        <div class="h-card"><div class="h-num">15<span>%</span></div><div class="h-label">Reporting accuracy improved at Texas State</div></div>
-        <div class="h-card"><div class="h-num">200<span>+</span></div><div class="h-label">Students &amp; faculty supported weekly</div></div>
-        <div class="h-card"><div class="h-num">30<span>%</span></div><div class="h-label">Manual moderation reduced via automation</div></div>
-        <div class="h-card"><div class="h-num">50K<span>+</span></div><div class="h-label">User interactions analyzed at SAGE</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-eye reveal">02 — Career</div>
-    <h2 class="reveal"><em>Work</em> Experience</h2>
-
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-date">Jan 2025 — Present</div>
-        <div class="exp-co">Office of Educator Preparation</div>
-        <div class="exp-loc">Texas State University<br>San Marcos, TX</div>
-      </div>
+    <div class="section-head reveal">
       <div>
-        <div class="exp-role">Graduate Assistant - Data Analyst</div>
-        <ul class="exp-ul">
-          <li>Architected end-to-end BI solutions by integrating Python and SQL to process 10,000+ student and program records, improving reporting integrity and KPI performance by 15%.</li>
-          <li>Engineered automated ETL pipelines for Excel and disparate data sources (Pearson, SL&amp;L), reducing manual data preparation by 40% and ensuring single source of truth reporting.</li>
-          <li>Designed and deployed interactive Tableau and Power BI dashboards translating complex datasets into actionable executive summaries for program tracking and strategic decision-making.</li>
-          <li>Developed robust data validation frameworks during post-implementation audits to monitor model drift and sustained accuracy of operational KPIs across diverse business units.</li>
-          <li>Coordinated data reporting workflows and stakeholder communication for 200+ students and faculty, improving operational efficiency by 20%.</li>
-        </ul>
+        <div class="kicker">About</div>
+        <h2>Data science. Machine learning. AI-powered analytics.</h2>
       </div>
+
+      <p class="section-intro">
+        I build end-to-end AI, machine learning, and analytics projects that transform complex data into dashboards, insights, automation, and real-world business impact.
+      </p>
     </div>
 
-    <div class="exp-item reveal" style="transition-delay:.1s">
-      <div class="exp-left">
-        <div class="exp-date">Sep 2023 — Jan 2024</div>
-        <div class="exp-co">SAGE</div>
-        <div class="exp-loc">Hyderabad, India</div>
+    <div class="about-card reveal">
+      <div class="about-grid">
+
+        <div class="about-text">
+          <p>
+            I am <strong>Radhi Sri Bhavya Patamsetti</strong>, a Master's student in Computer Science at Texas State University with a background in Artificial Intelligence and Data Science.
+          </p>
+
+          <p>
+            My work focuses on transforming raw data into intelligent products through
+            <strong>
+              data preprocessing, feature engineering, machine learning, deep learning,
+              predictive analytics, anomaly detection, model evaluation, dashboard development,
+              ETL workflows, and Generative AI integration
+            </strong>.
+          </p>
+
+          <p>
+            I enjoy building practical AI-powered systems that are simple for non-technical users
+            while remaining technically strong under the hood - including AI-driven BI dashboards,
+            cyber threat detection systems, computer vision applications, forecasting dashboards,
+            analytics automation tools, and interactive machine learning platforms.
+          </p>
+
+          <p>
+            My experience spans machine learning engineering, business intelligence,
+            data analytics, workflow automation, and AI product development using Python,
+            SQL, TensorFlow, Scikit-learn, Streamlit, Tableau, Power BI, and cloud-based AI tools.
+          </p>
+        </div>
+
+        <div class="focus-list">
+
+          <div class="focus-item">
+            <h3>Machine Learning</h3>
+            <p>
+              Classification, regression, anomaly detection, predictive analytics,
+              feature engineering, model evaluation, and production-style ML workflows.
+            </p>
+          </div>
+
+          <div class="focus-item">
+            <h3>AI Applications</h3>
+            <p>
+              Generative AI, Streamlit applications, FastAPI, LLM integrations,
+              interactive AI dashboards, and user-focused intelligent systems.
+            </p>
+          </div>
+
+          <div class="focus-item">
+            <h3>Analytics & BI</h3>
+            <p>
+              Python, SQL, Power BI, Tableau, KPI reporting, ETL workflows,
+              automation pipelines, and stakeholder-ready business insights.
+            </p>
+          </div>
+
+        </div>
       </div>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <strong>10K+</strong>
+          <span>Records analyzed for reporting & analytics</span>
+        </div>
+
+        <div class="metric">
+          <strong>40%</strong>
+          <span>Reduction in manual reporting workflows</span>
+        </div>
+
+        <div class="metric">
+          <strong>25%</strong>
+          <span>Increase in platform engagement</span>
+        </div>
+
+        <div class="metric">
+          <strong>50K+</strong>
+          <span>User interactions analyzed through dashboards</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="experience">
+  <div class="wrap">
+
+    <div class="section-head reveal">
       <div>
-        <div class="exp-role">Data Scientist &amp; Community Manager Intern</div>
-        <ul class="exp-ul">
-          <li>Developed ML-powered CLV, churn, and lifecycle models to identify user behaviour patterns and high-impact engagement drivers, resulting in a 25% increase in community platform retention and activation.</li>
-          <li>Built NLP text classification models and Python automation bots for real-time message categorization and sentiment analysis, reducing manual moderation by 30%.</li>
-          <li>Architected comprehensive multi-touch attribution and ROI tracking systems in Power BI and Excel (VBA), monitoring growth, retention, and activation across 50,000+ interactions.</li>
-          <li>Conducted A/B testing and statistical ROI analysis for 10+ partner campaigns, using EDA to optimize marketing spend and drive user acquisition strategies.</li>
-          <li>Presented data-driven strategy reports to external partners using visualization to communicate campaign ROI, user acquisition trends, and community health metrics.</li>
-        </ul>
+        <div class="kicker">Experience</div>
+        <h2>Building AI, analytics, and data-driven products.</h2>
       </div>
+
+      <p class="section-intro">
+        Professional experience across machine learning, analytics, automation,
+        dashboard development, and stakeholder-focused AI solutions.
+      </p>
     </div>
+
+    <div class="timeline">
+
+      <!-- EXPERIENCE 1 -->
+
+      <article class="exp-card reveal">
+
+        <div>
+          <div class="exp-date">Jan 2025 - May 2026</div>
+          <div class="exp-company">Office of Educator Preparation</div>
+          <div class="exp-location">
+            Texas State University · San Marcos, TX
+          </div>
+        </div>
+
+        <div>
+
+          <h3 class="exp-role">
+            Graduate Assistant - Data Analyst
+          </h3>
+
+          <ul class="exp-points">
+
+            <li>
+              Analyzed <strong>10,000+</strong> student and academic records using
+              Python, SQL, Excel, and Qualtrics to identify trends, improve
+              reporting accuracy, and support data-driven institutional decisions.
+            </li>
+
+            <li>
+              Developed automated Tableau dashboards and Excel-based ETL workflows
+              that reduced manual reporting effort by
+              <strong>40%</strong> while improving KPI reporting and compliance tracking.
+            </li>
+
+            <li>
+              Performed data cleaning, transformation, validation, and exploratory
+              data analysis (EDA) on large educational datasets to support
+              operational analytics and strategic planning initiatives.
+            </li>
+
+            <li>
+              Created stakeholder-ready dashboards, reports, and analytics summaries
+              to improve accessibility of insights for faculty, administrators,
+              and non-technical users.
+            </li>
+
+            <li>
+              Collaborated with cross-functional teams to streamline workflows,
+              automate recurring reporting tasks, and support institutional
+              reporting and accreditation processes.
+            </li>
+
+          </ul>
+
+        </div>
+
+      </article>
+
+      <!-- EXPERIENCE 2 -->
+
+      <article class="exp-card reveal">
+
+        <div>
+          <div class="exp-date">Sep 2023 - Feb 2024</div>
+          <div class="exp-company">SAGE</div>
+          <div class="exp-location">
+            Hyderabad, India · Remote / Hybrid
+          </div>
+        </div>
+
+        <div>
+
+          <h3 class="exp-role">
+            Data Science Intern
+          </h3>
+
+          <ul class="exp-points">
+
+            <li>
+              Developed ML-powered analytics workflows to identify user behavior
+              patterns, engagement trends, and feature performance, contributing to
+              a <strong>25%</strong> increase in community engagement.
+            </li>
+
+            <li>
+              Designed KPI dashboards using Power BI, Excel, and automation workflows
+              to analyze growth, retention, and activation metrics across
+              <strong>50,000+</strong> user interactions.
+            </li>
+
+            <li>
+              Performed data collection, cleaning, transformation, and exploratory
+              data analysis (EDA) on large user datasets to generate actionable
+              insights for product and marketing initiatives.
+            </li>
+
+            <li>
+              Built automated reporting and analytics workflows that improved
+              operational monitoring and simplified performance tracking for
+              non-technical stakeholders.
+            </li>
+
+            <li>
+              Collaborated with internal teams and external partners to support
+              campaign analytics, user acquisition strategies, and
+              data-driven business decisions.
+            </li>
+
+          </ul>
+
+        </div>
+
+      </article>
+
+    </div>
+
   </div>
 </section>
 
-<!-- EDUCATION -->
-<section id="education">
+    <section class="section" id="education">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Education</div>
+            <h2>Academic foundation.</h2>
+          </div>
+        </div>
+        <div class="edu-grid">
+          <article class="card reveal">
+            <span class="badge">Graduate Degree</span>
+            <h3>Master of Science in Computer Science</h3>
+            <p>Texas State University · San Marcos, Texas, USA</p>
+            <div class="meta"><span>Aug 2024 - May 2026</span><span>GPA 3.64 / 4.0</span></div>
+          </article>
+          <article class="card reveal" style="transition-delay:.08s">
+            <span class="badge">Undergraduate Degree</span>
+            <h3>Bachelor of Technology in AI & Data Science</h3>
+            <p>Shri Vishnu Engineering College for Women · Bhimavaram, India</p>
+            <div class="meta"><span>Aug 2020 - May 2024</span><span>GPA 8.72 / 10.0</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+<section class="section" id="skills">
+
+  <div class="wrap skills-wrap reveal">
+
+    <div class="kicker">Skills</div>
+
+    <h2>Technical stack for AI, machine learning, and analytics.</h2>
+
+    <div class="skills-grid">
+
+      <!-- SKILL BLOCK 1 -->
+
+      <div class="skill-block">
+
+        <h3>Programming & Databases</h3>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">VBA</span>
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">OOP</span>
+          <span class="tag">HTML/CSS</span>
+        </div>
+
+      </div>
+
+      <!-- SKILL BLOCK 2 -->
+
+      <div class="skill-block">
+
+        <h3>Data Analytics & Engineering</h3>
+
+        <div class="tags">
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Data Transformation</span>
+          <span class="tag">EDA</span>
+          <span class="tag">ETL Workflows</span>
+          <span class="tag">Data Validation</span>
+          <span class="tag">Workflow Automation</span>
+          <span class="tag">KPI Reporting</span>
+        </div>
+
+      </div>
+
+      <!-- SKILL BLOCK 3 -->
+
+      <div class="skill-block">
+
+        <h3>Visualization & Business Intelligence</h3>
+
+        <div class="tags">
+          <span class="tag">Tableau</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">Dashboard Development</span>
+          <span class="tag">Business Intelligence</span>
+          <span class="tag">Data Storytelling</span>
+        </div>
+
+      </div>
+
+      <!-- SKILL BLOCK 4 -->
+
+      <div class="skill-block">
+
+        <h3>Machine Learning & AI</h3>
+
+        <div class="tags">
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Keras</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">Classification</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Anomaly Detection</span>
+          <span class="tag">Predictive Analytics</span>
+          <span class="tag">Feature Engineering</span>
+          <span class="tag">Model Evaluation</span>
+          <span class="tag">Forecasting</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">NLP</span>
+        </div>
+
+      </div>
+
+      <!-- SKILL BLOCK 5 -->
+
+      <div class="skill-block">
+
+        <h3>AI Applications & Deployment</h3>
+
+        <div class="tags">
+          <span class="tag">Generative AI</span>
+          <span class="tag">LLMs</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Google Gemini API</span>
+          <span class="tag">API Integration</span>
+          <span class="tag">Model Deployment</span>
+          <span class="tag">Automation</span>
+        </div>
+
+      </div>
+
+      <!-- SKILL BLOCK 6 -->
+
+      <div class="skill-block">
+
+        <h3>Professional Skills</h3>
+
+        <div class="tags">
+          <span class="tag">Analytical Thinking</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Stakeholder Reporting</span>
+          <span class="tag">Cross-functional Collaboration</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Documentation</span>
+          <span class="tag">Strategic Reporting</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CERTIFICATIONS -->
+
+    <div class="cert-row">
+
+      <span class="cert">
+        AWS Academy Graduate - Machine Learning Foundations
+      </span>
+
+      <span class="cert">
+        AWS Academy Graduate - Cloud Foundations
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="projects">
   <div class="wrap">
-    <div class="sec-eye reveal">03 — Academic</div>
-    <h2 class="reveal"><em>Academic</em> Background</h2>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-badge">Graduate Degree</div>
-        <div class="edu-deg">Master of Science<br>Computer Science</div>
-        <div class="edu-sch">Texas State University · San Marcos, Texas, USA</div>
-        <div class="edu-meta">
-          <div><div class="edu-yr">Aug 2024 — May 2026</div></div>
-          <div style="text-align:right"><div class="edu-gpa">3.64</div><div class="edu-gpa-sub">GPA / 4.0</div></div>
-        </div>
+
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">Projects</div>
+        <h2>AI, machine learning, and analytics projects.</h2>
       </div>
-      <div class="edu-card reveal" style="transition-delay:.12s">
-        <div class="edu-badge">Undergraduate Degree</div>
-        <div class="edu-deg">Bachelor of Technology<br>AI &amp; Data Science</div>
-        <div class="edu-sch">Shri Vishnu Engineering College for Women · Bhimavaram, India</div>
-        <div class="edu-meta">
-          <div><div class="edu-yr">Aug 2020 — May 2024</div></div>
-          <div style="text-align:right"><div class="edu-gpa">8.72</div><div class="edu-gpa-sub">GPA / 10.0</div></div>
-        </div>
-      </div>
+
+      <p class="section-intro">
+        End-to-end projects focused on machine learning, Generative AI, business intelligence,
+        automation, forecasting, computer vision, and real-world decision-making systems.
+      </p>
     </div>
+
+    <div class="project-grid">
+
+      <!-- PROJECT 1 -->
+
+      <article class="card project-card reveal">
+
+        <div class="project-num">01</div>
+
+        <div class="project-tech">
+          Python · Streamlit · Plotly · Pandas · Gemini API · ReportLab · Generative AI
+        </div>
+
+        <h3>Lumivise - AI Data Analyst & BI Platform</h3>
+
+        <p>
+          Developed a complete AI-powered Business Intelligence platform that transforms
+          raw datasets into interactive dashboards, automated visualizations,
+          KPI summaries, executive reports, and analyst-style insights.
+        </p>
+
+        <p>
+          Built automated preprocessing pipelines for data cleaning, duplicate handling,
+          datatype detection, transformation, and structured analytics workflows
+          using Python and Pandas.
+        </p>
+
+        <p>
+          Designed an intelligent visualization engine that dynamically generates
+          relevant charts including bar charts, line charts, scatter plots,
+          histograms, and geo-based visualizations based on uploaded dataset structure.
+        </p>
+
+        <p>
+          Developed an interactive <strong>Visual Explorer</strong> module that allows users
+          to manually select chart types, dimensions, filters, and metrics similar
+          to a lightweight Power BI experience for exploratory analytics.
+        </p>
+
+        <p>
+          Integrated Google Gemini API to generate AI-driven analytical summaries,
+          trend analysis, anomaly detection, business recommendations,
+          KPI explanations, and executive-level insights for non-technical users.
+        </p>
+
+        <p>
+          Implemented downloadable PDF report generation using ReportLab and
+          developed a premium Streamlit interface with dashboard filtering,
+          session management, and analyst-focused user experience design.
+        </p>
+
+        <a class="project-link"
+           href="https://github.com/BhavyaPatamsetti/Lumivise.git"
+           target="_blank"
+           rel="noopener">
+          View GitHub →
+        </a>
+
+      </article>
+
+      <!-- PROJECT 2 -->
+
+      <article class="card project-card reveal" style="transition-delay:.06s">
+
+        <div class="project-num">02</div>
+
+        <div class="project-tech">
+          Python · Scikit-learn · XGBoost · Isolation Forest · Pandas · Joblib
+        </div>
+
+        <h3>AI Cyber Threat Detection System</h3>
+
+        <p>
+          Developed an end-to-end AI-powered cybersecurity system using the NSL-KDD
+          dataset to identify malicious and anomalous network traffic patterns.
+        </p>
+
+        <p>
+          Built binary and multi-class machine learning models using
+          Logistic Regression, Random Forest, and XGBoost to classify traffic into
+          Normal, DoS, Probe, R2L, and U2R attack categories.
+        </p>
+
+        <p>
+          Implemented Isolation Forest anomaly detection to identify suspicious
+          and previously unseen attack patterns from normal network behavior.
+        </p>
+
+        <p>
+          Designed scalable preprocessing pipelines with feature engineering,
+          One-Hot Encoding, StandardScaler, and Scikit-learn Pipelines
+          for production-style machine learning workflows.
+        </p>
+
+        <p>
+          Evaluated models using Accuracy, Precision, Recall, F1-Score,
+          ROC-AUC, Confusion Matrix, and Classification Reports with a focus on
+          minimizing missed cyber attacks and improving detection reliability.
+        </p>
+
+        <p>
+          Developed risk scoring logic to categorize threats into Low,
+          Medium, and High risk levels and built reusable prediction pipelines
+          using Joblib for real-time inference workflows.
+        </p>
+
+        <a class="project-link"
+           href="https://github.com/BhavyaPatamsetti/AI_Cyber_Threat_Detection.git"
+           target="_blank"
+           rel="noopener">
+          View GitHub →
+        </a>
+
+      </article>
+
+      <!-- PROJECT 3 -->
+
+      <article class="card project-card reveal" style="transition-delay:.12s">
+
+        <div class="project-num">03</div>
+
+        <div class="project-tech">
+          Tableau · SQL · Excel · Predictive Analytics · CLV · Forecasting
+        </div>
+
+        <h3>AI-Driven Marketing ROI Dashboard</h3>
+
+        <p>
+          Designed and developed an interactive Tableau marketing analytics dashboard
+          to evaluate campaign ROI, customer lifetime value (CLV),
+          attribution performance, and customer engagement behavior.
+        </p>
+
+        <p>
+          Built predictive revenue forecasting models using Tableau’s
+          exponential smoothing and time-series analytics to project
+          future sales performance and support budget planning decisions.
+        </p>
+
+        <p>
+          Developed customer segmentation and cohort analysis workflows
+          to categorize users into loyalty groups based on engagement,
+          purchasing behavior, and lifetime value metrics.
+        </p>
+
+        <p>
+          Implemented uplift analysis and campaign effectiveness metrics
+          to compare actual conversions against AI-predicted outcomes
+          for measuring true marketing impact.
+        </p>
+
+        <p>
+          Created multi-touch attribution dashboards and funnel visualizations
+          to analyze customer journey behavior across Email, Social,
+          and Direct acquisition channels.
+        </p>
+
+        <p>
+          Improved executive decision-making through KPI dashboards,
+          storytelling-driven visualizations, interactive analytics,
+          and business intelligence reporting.
+        </p>
+
+        <a class="project-link"
+           href="https://github.com/BhavyaPatamsetti/AI-Driven-Marketing-ROI-Dashboard-Tableau.git"
+           target="_blank"
+           rel="noopener">
+          View GitHub →
+        </a>
+
+      </article>
+
+      <!-- PROJECT 4 -->
+
+      <article class="card project-card reveal" style="transition-delay:.18s">
+
+        <div class="project-num">04</div>
+
+        <div class="project-tech">
+          Python · TensorFlow · Keras · U-Net · Streamlit · OpenCV · Computer Vision
+        </div>
+
+        <h3>GI Segmentation using U-net</h3>
+
+        <p>
+          Developed an AI-powered medical image segmentation dashboard
+          using a U-Net deep learning architecture to identify and segment
+          gastrointestinal structures from medical images.
+        </p>
+
+        <p>
+          Built a complete computer vision pipeline including image preprocessing,
+          normalization, resizing, mask generation, and real-time segmentation inference
+          using TensorFlow and Keras.
+        </p>
+
+        <p>
+          Designed an interactive Streamlit dashboard that enables users to upload
+          medical images, generate segmentation masks,
+          visualize overlays, and download processed outputs.
+        </p>
+
+        <p>
+          Implemented analytical metrics including segmentation coverage,
+          segmented pixel count, prediction confidence,
+          and mask quality interpretation for improved explainability.
+        </p>
+
+        <p>
+          Added threshold tuning, overlay opacity adjustment,
+          and visualization customization controls to improve user experience
+          and analysis flexibility.
+        </p>
+
+        <p>
+          Integrated OpenCV, NumPy, and PIL for advanced image processing,
+          transformation, and visualization workflows.
+        </p>
+
+        <a class="project-link"
+           href="https://github.com/BhavyaPatamsetti/Gastro-Intestine-Segmentation-using-U-net.git"
+           target="_blank"
+           rel="noopener">
+          View GitHub →
+        </a>
+
+      </article>
+
+      <!-- PROJECT 5 -->
+
+      <article class="card project-card reveal" style="transition-delay:.24s">
+
+        <div class="project-num">05</div>
+
+        <div class="project-tech">
+          Power BI · Python · Pandas · Prophet · REST APIs · Forecasting
+        </div>
+
+        <h3>AI-Powered Billionaire Wealth & Global Impact Dashboard</h3>
+
+        <p>
+          Designed and developed a multi-page Power BI analytics dashboard
+          analyzing billionaire wealth trends and comparing wealth distribution
+          against the estimated costs of solving major global challenges.
+        </p>
+
+        <p>
+          Integrated and cleaned multi-source datasets from Forbes,
+          World Bank, and FRED APIs using Python, Pandas,
+          and data transformation workflows.
+        </p>
+
+        <p>
+          Built AI-driven forecasting models using Facebook Prophet
+          to predict billionaire net worth trends and economic growth patterns
+          from 2026–2028.
+        </p>
+
+        <p>
+          Developed comparative analytics to evaluate billionaire wealth
+          against issues such as climate change, healthcare,
+          world hunger, and global education funding.
+        </p>
+
+        <p>
+          Created economic trend visualizations using GDP and macroeconomic indicators
+          to analyze relationships between wealth growth,
+          industries, and global economic conditions.
+        </p>
+
+        <p>
+          Designed storytelling-driven Power BI dashboards with KPI cards,
+          forecasting visuals, drill-through reports,
+          interactive filters, and executive-style analytics summaries.
+        </p>
+
+        <a class="project-link"
+           href="https://github.com/BhavyaPatamsetti/AI_Forecasted_Billionaire_Report_2026.git"
+           target="_blank"
+           rel="noopener">
+          View GitHub →
+        </a>
+
+      </article>
+
+    </div>
+
   </div>
 </section>
+    
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-eye reveal">04 — Expertise</div>
-    <h2 class="reveal">Skills &amp; <em>Stack</em></h2>
-    <div class="sk-grid reveal">
-      <div class="sk-block">
-        <div class="sk-cat">Programming</div>
-        <div class="sk-tags">
-          <span class="sk-tag">Python</span><span class="sk-tag">SQL</span><span class="sk-tag">MySQL</span>
-          <span class="sk-tag">Git</span><span class="sk-tag">VBA</span><span class="sk-tag">DAX</span>
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-panel reveal">
+          <div class="kicker">Contact</div>
+          <h2>Let’s build something useful.</h2>
+          <p>Open to Machine Learning Engineer, Junior Data Scientist, Data Scientist, AI Engineer, and AI/Data product roles.</p>
+          <div class="contact-links">
+            <a href="mailto:radhisribhavya2024p@gmail.com">Email</a>
+            <a href="tel:7372066924">Call</a>
+            <a href="https://www.linkedin.com/in/bhavyapatamsetti/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/BhavyaPatamsetti" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://bhavyapatamsetti.github.io/RadhiSriBhavya_Patamsetti/" target="_blank" rel="noopener">Portfolio</a>
+          </div>
         </div>
       </div>
-      <div class="sk-block">
-        <div class="sk-cat">Data Analysis</div>
-        <div class="sk-tags">
-          <span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">SciPy</span>
-          <span class="sk-tag">EDA</span><span class="sk-tag">Statistical Analysis</span>
-          <span class="sk-tag">Hypothesis Testing</span><span class="sk-tag">A/B Testing</span>
-          <span class="sk-tag">Data Cleaning</span><span class="sk-tag">ETL Pipelines</span>
-          <span class="sk-tag">Data Warehousing</span><span class="sk-tag">API Integration</span>
-        </div>
-      </div>
-      <div class="sk-block">
-        <div class="sk-cat">Visualization & BI</div>
-        <div class="sk-tags">
-          <span class="sk-tag">Tableau</span><span class="sk-tag">Power BI</span>
-          <span class="sk-tag">Matplotlib</span><span class="sk-tag">Seaborn</span>
-          <span class="sk-tag">KPI Dashboards</span><span class="sk-tag">DAX Measures</span>
-          <span class="sk-tag">Interactive Reports</span><span class="sk-tag">Executive Dashboards</span>
-          <span class="sk-tag">Data Storytelling</span><span class="sk-tag">Data Modeling</span>
-        </div>
-      </div>
-      <div class="sk-block">
-        <div class="sk-cat">Machine Learning & AI</div>
-        <div class="sk-tags">
-          <span class="sk-tag">Scikit-learn</span><span class="sk-tag">TensorFlow / Keras</span>
-          <span class="sk-tag">PyTorch</span><span class="sk-tag">Facebook Prophet</span>
-          <span class="sk-tag">Time Series Forecasting</span><span class="sk-tag">NLP</span>
-          <span class="sk-tag">LLMs</span><span class="sk-tag">RAG Systems</span>
-          <span class="sk-tag">Regression</span><span class="sk-tag">Classification</span>
-          <span class="sk-tag">Clustering</span><span class="sk-tag">Feature Engineering</span>
-          <span class="sk-tag">Uplift Modeling</span><span class="sk-tag">Multi-Touch Attribution</span>
-        </div>
-      </div>
-      <div class="sk-block">
-        <div class="sk-cat">Data & Cloud</div>
-        <div class="sk-tags">
-          <span class="sk-tag">Excel</span><span class="sk-tag">Forbes API</span>
-          <span class="sk-tag">World Bank API</span><span class="sk-tag">FRED API</span>
-          <span class="sk-tag">Kaggle</span><span class="sk-tag">Oracle</span>
-          <span class="sk-tag">AWS</span><span class="sk-tag">Jupyter</span>
-          <span class="sk-tag">Anaconda</span><span class="sk-tag">Data Governance</span>
-        </div>
-      </div>
-      <div class="sk-block">
-        <div class="sk-cat">Soft Skills</div>
-        <div class="sk-tags">
-          <span class="sk-tag">Stakeholder Management</span>
-          <span class="sk-tag">Requirements Gathering</span>
-          <span class="sk-tag">Cross-functional Collab</span>
-          <span class="sk-tag">Documentation</span>
-          <span class="sk-tag">Process Optimization</span>
-          <span class="sk-tag">Data Storytelling</span>
-          <span class="sk-tag">Deadline Management</span>
-        </div>
-      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Radhi Sri Bhavya Patamsetti</span>
+      <span>Data Analyst · Data Scientist · Machine Learning Engineer · AI Builder</span>
     </div>
+  </footer>
 
-    <div class="sec-eye reveal" style="margin-top:3rem;margin-bottom:1.25rem">Certifications</div>
-    <div class="certs reveal">
-      <div class="cert">AWS - Machine Learning Foundations</div>
-      <div class="cert">AWS - Academy Cloud Foundations</div>
-      <div class="cert">Tableau Desktop Specialist - Coursera</div>
-      <div class="cert">Python Essentials - Cisco</div>
-      <div class="cert">Oracle - Database Foundations</div>
-      <div class="cert">CSI VIT-AP - UI/UX Designing Bootcamp</div>
-      <div class="cert">NIT AP - Drone Technology</div>
-      <div class="cert">Udemy - Excel Essentials</div>
-    </div>
-  </div>
-</section>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-eye reveal">05 - Work</div>
-    <h2 class="reveal">Featured <em>Projects</em></h2>
-    <div class="proj-grid">
 
-      <div class="proj-card reveal">
-        <div class="proj-num">01</div>
-        <div class="proj-tech">Python · Power BI · Facebook Prophet · Forbes API · World Bank API · FRED API · DAX</div>
-        <div class="proj-title">Could Billionaires Fix The World? - AI Forecasted Dashboard 2026</div>
-        <p class="proj-desc">A 5-page interactive Power BI dashboard analyzing whether the world's top 20 billionaires could fund solutions to humanity's greatest challenges. Built with live 2026 Forbes data, World Bank GDP, and FRED economic indicators. Engineered dynamic DAX measures for real-time affordability labels. Trained Facebook Prophet ML model on 8 years of historical wealth data to forecast billionaire net worth through 2028 - predicting Elon Musk becomes the world's first Trillionaire by 2026.</p>
-        <div class="proj-links">
-          <a href="https://github.com/BhavyaPatamsetti/AI_Forecasted_Billionaire_Report_2026" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24"><path d="M14 3h7v7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3V3h7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      </div>
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-      <div class="proj-card reveal" style="transition-delay:.1s">
-        <div class="proj-num">02</div>
-        <div class="proj-tech">Tableau · Uplift Modeling · Multi-Touch Attribution · K-Means Clustering · CLV Analysis · EDA</div>
-        <div class="proj-title">AI-Driven Marketing ROI Dashboard</div>
-        <p class="proj-desc">Architected a unified marketing analytics platform consolidating transaction data, customer profiles, and business objectives. Engineered Uplift Models and Multi-Touch Attribution (MTA) algorithms to isolate incremental conversion lift and optimize budget allocation. Developed a high-dimensional customer segmentation engine using K-means clustering and CLV forecasting across 50,000+ interactions. Created a Strategic Performance Quadrant enabling real-time campaign optimization for high-growth segments.</p>
-        <div class="proj-links">
-          <a href="https://public.tableau.com/views/AIDrivenMarketingROIDashboard/AIDrivenMarketingROIDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24"><path d="M14 3h7v7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3V3h7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            View Dashboard
-          </a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" style="transition-delay:.2s">
-        <div class="proj-num">03</div>
-        <div class="proj-tech">GPT-OSS · FAISS · Whisper.cpp · RAG · NLP · LLMs · Offline AI</div>
-        <div class="proj-title">Disaster Response Assistant</div>
-        <p class="proj-desc">Developed a mission-critical Retrieval-Augmented Generation (RAG) system integrating GPT-OSS models and FAISS vector search for high-speed semantic retrieval of emergency protocols - sub-second retrieval speeds ensured. Optimized Whisper.cpp for real-time speech-to-text processing of survival and medical workflows. Offline inference with quantized models ensures 100% functionality in low-connectivity, high-pressure environments, transforming unstructured emergency data into actionable step-by-step frameworks.</p>
-        <div class="proj-links">
-          <a href="https://github.com/BhavyaPatamsetti/Disaster-Response-Assistant" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24"><path d="M14 3h7v7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3V3h7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            View on GitHub
-          </a>
-        </div>
-        </div>
-
-      <div class="proj-card reveal" style="transition-delay:.3s">
-        <div class="proj-num">04</div>
-        <div class="proj-tech">U-Net · CNN · Medical Imaging · PyTorch · IoU · Dice Loss · Deep Learning</div>
-        <div class="proj-title">Gastro-Intestine Segmentation</div>
-        <p class="proj-desc">Engineered a U-Net CNN architecture for semantic segmentation of 3D medical CT/MRI datasets, achieving 85% Dice accuracy for automated lesion detection. Optimized custom IoU and Dice loss functions to handle class imbalance in large-scale volumetric data. Applied CNN-based feature extraction and hyperparameter tuning to accelerate convergence, streamline the training pipeline, and reduce manual clinician review time - significantly improving diagnostic throughput and data integrity.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-eye reveal">06 — Connect</div>
-    <h2 class="reveal">Let's <em>Work</em> Together</h2>
-    <p class="contact-sub reveal">Open to Data Analyst, BI Analyst, Data Scientist, Reporting Analyst, and ML-related roles. Also open to research collaborations and interesting data problems. Reach out - I'd love to connect.</p>
-    <div class="contact-row reveal">
-      <a href="mailto:radhisribhavya2024p@gmail.com" class="con-link">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email
-      </a>
-      <a href="tel:7372066924" class="con-link">
-        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>(737) 206-6924
-      </a>
-      <a href="https://www.linkedin.com/in/bhavyapatamsetti/" target="_blank" class="con-link">
-        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
-      </a>
-      <a href="https://github.com/BhavyaPatamsetti" target="_blank" class="con-link">
-        <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>GitHub
-      </a>
-      <a href="https://bhavyapatamsetti.github.io/RadhiSriBhavya_Patamsetti/" target="_blank" class="con-link">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Portfolio
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Radhi Sri Bhavya Patamsetti</p>
-  <p><a href="mailto:radhisribhavya2024p@gmail.com">radhisribhavya2024p@gmail.com</a></p>
-</footer>
-
-<script>
-const cur=document.getElementById('cur'),curR=document.getElementById('curR');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function t(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(t)})();
-
-function updateResume(){
-  const sel=document.getElementById('resumeSelect');
-  const link=document.getElementById('resumeLink');
-  if(sel.value){link.href=sel.value;link.style.opacity='1';link.style.pointerEvents='auto';}
-  else{link.href='#';link.style.opacity='.4';link.style.pointerEvents='none';}
-}
-
-function cm(){document.getElementById('mob').classList.remove('open')}
-
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{
-  let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)c=s.id});
-  nls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
-},{passive:true});
-</script>
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let active = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 140) active = section.id;
+      });
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + active));
+    }, { passive: true });
+  </script>
 </body>
 </html>
